@@ -4,7 +4,7 @@ Zeal: eager loading (but not too eager) for ActiveRecord collections
 Sometimes you need to eager load some associations, but it's not
 convenient to do so at the same time as loading the original records.
 Zeal is a simple gem that offers a couple of different ways to trigger
-ActiveRecord's built in eager loading on an array of already-retrieved
+ActiveRecord's built-in eager loading on an array of already-retrieved
 records.
 
 ### For Example
@@ -34,8 +34,8 @@ def users_and_friends_and_stuff
 end
 ```
 
-You can now avoid N+1 while also avoiding unnecessary preloading and
-keeping your code as DRY as possible.
+You can now avoid both N+1 and unnecessary preloading, while keeping
+your code as DRY as possible.
 
 ### Usage
 
@@ -43,15 +43,18 @@ There are two ways to use Zeal: the nicer, more intrusive way, and the
 more explicit, less intrusive way.
 
 ``` ruby
-# more_instrusive.rb
+# more_intrusive.rb
 class Array
-  include Zeal::ArrayMethods
+  include Zeal
 end
 
 @users.eager_load(:friends, :countrymen)
 
 # less_intrusive.rb
-Zeal.eager_load(@users, [:friends, :countrymen])
+Zeal.eager_load(@users, :friends, :countrymen)
+
+# or alternately
+@users.extend(Zeal).eager_load(@users, :friends, :countrymen)
 ```
 
 Your choice!

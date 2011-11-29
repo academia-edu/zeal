@@ -6,10 +6,10 @@ Gem::Specification.new do |s|
   s.name        = "zeal"
   s.version     = Zeal::VERSION
   s.authors     = ["Ryan Fitzgerald"]
-  s.email       = ["rwfitzge@gmail.com"]
+  s.email       = ["rfitz@academia.edu"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{eager loading (but not too eager) for ActiveRecord collections}
+  s.description = %q{Zeal allows you to eager-load associations on ActiveRecord objects that have already been loaded from the database.}
 
   s.rubyforge_project = "zeal"
 
