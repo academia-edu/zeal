@@ -54,7 +54,7 @@ end
 Zeal.eager_load(@users, :friends, :countrymen)
 
 # or alternately
-@users.extend(Zeal).eager_load(@users, :friends, :countrymen)
+@users.extend(Zeal).eager_load(:friends, :countrymen)
 ```
 
 Your choice!
