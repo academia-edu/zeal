@@ -6,12 +6,16 @@ module Zeal
   class << self
     if Rails.version.to_s =~ /^3/
       def eager_load(collection, *args)
-        ActiveRecord::Associations::Preloader.new(collection, args).run
+        if collection.length > 0
+          ActiveRecord::Associations::Preloader.new(collection, args).run
+        end
         collection
       end
     else
       def eager_load(collection, *args)
-        class_of_collection(collection).send(:preload_associations, collection, args)
+        if collection.length > 0
+          class_of_collection(collection).send(:preload_associations, collection, args)
+        end
         collection
       end
     end
