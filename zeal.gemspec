@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Zeal::VERSION
   s.authors     = ["Ryan Fitzgerald"]
   s.email       = ["rfitz@academia.edu"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/academia-edu/zeal"
   s.summary     = %q{eager loading (but not too eager) for ActiveRecord collections}
   s.description = %q{Zeal allows you to eager-load associations on ActiveRecord objects that have already been loaded from the database.}
 
