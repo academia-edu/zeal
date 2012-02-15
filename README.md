@@ -11,28 +11,24 @@ records.
 
 Let's say you want to do the equivalent of this:
 
-``` ruby
-User.find(:all, :limit => 10, :include => {:posts => :comments})
-```
+    User.find(:all, :limit => 10, :include => {:posts => :comments})
 
 If you're reducing code duplication by loading Users in a before filter
 that's shared between multiple actions, it may not make sense to eager
 load the same associations for all of those pages. Instead, you can do
 this:
 
-``` ruby
-# before_filters.rb
-@users = User.find(:all, :limit => 10)
+    # before_filters.rb
+    @users = User.find(:all, :limit => 10)
 
-# users_controller.rb
-def users_and_posts_and_stuff
-  @users.eager_load(:posts => :comments)
-end
+    # users_controller.rb
+    def users_and_posts_and_stuff
+      @users.eager_load(:posts => :comments)
+    end
 
-def users_and_friends_and_stuff
-  @users.eager_load(:friends, :countrymen)
-end
-```
+    def users_and_friends_and_stuff
+      @users.eager_load(:friends, :countrymen)
+    end
 
 You can now avoid both N+1 and unnecessary preloading, while keeping
 your code as DRY as possible.
@@ -42,19 +38,17 @@ your code as DRY as possible.
 There are two ways to use Zeal: the nicer, more intrusive way, and the
 more explicit, less intrusive way.
 
-``` ruby
-# more_intrusive.rb
-class Array
-  include Zeal
-end
+    # more_intrusive.rb
+    class Array
+      include Zeal
+    end
 
-@users.eager_load(:friends, :countrymen)
+    @users.eager_load(:friends, :countrymen)
 
-# less_intrusive.rb
-Zeal.eager_load(@users, :friends, :countrymen)
+    # less_intrusive.rb
+    Zeal.eager_load(@users, :friends, :countrymen)
 
-# or alternately
-@users.extend(Zeal).eager_load(:friends, :countrymen)
-```
+    # or alternately
+    @users.extend(Zeal).eager_load(:friends, :countrymen)
 
 Your choice!

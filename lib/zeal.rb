@@ -4,7 +4,7 @@ module Zeal
   class EagerLoadError < RuntimeError; end
 
   class << self
-    if Rails.version.to_s =~ /^3/
+    if Rails::VERSION::MAJOR == 3 && Rails::VERSION::MINOR >= 1
       def eager_load(collection, *args)
         if collection.length > 0
           ActiveRecord::Associations::Preloader.new(collection, args).run
@@ -38,6 +38,5 @@ module Zeal
 
   def eager_load(*args)
     Zeal.eager_load(self, *args)
-    self
   end
 end
